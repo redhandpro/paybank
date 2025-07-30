@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+  <meta charset="UTF-8" />
+  <title>PayBank Simple</title>
+  <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
+</head>
+<body style="font-family: sans-serif; text-align:center; margin-top:50px;">
+  <h1>PayBank</h1>
+  <p>شماره کارت خود را وارد کنید:</p>
+  <input type="text" id="card" placeholder="شماره کارت" />
+  <p>مبلغ (تومان):</p>
+  <input type="number" id="amount" placeholder="مبلغ" />
+  <br /><br />
+  <button onclick="generateQR()">ساخت QR</button>
+  <div id="qrcode" style="margin-top:20px;"></div>
+
+  <script>
+    function generateQR() {
+      const card = document.getElementById("card").value;
+      const amount = document.getElementById("amount").value;
+      const link = `https://your-payment-gateway.com/pay?card=${card}&amount=${amount}`;
+      QRCode.toCanvas(document.getElementById("qrcode"), link, function (error) {
+        if (error) console.error(error);
+        console.log("QR ساخته شد!");
+      });
+    }
+  </script>
+</body>
+</html>
