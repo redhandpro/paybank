@@ -1,38 +1,62 @@
-<!DOCTYPE html>
-<html lang="fa" dir="rtl">
-<head>
-    <meta charset="UTF-8">
-    <title>داشبورد</title>
-    <style>
-        body {
-            font-family: 'Vazir', sans-serif;
-            background: #0b0e1a;
-            color: #fff;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            margin: 0;
-            flex-direction: column;
+font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.2);
+            margin-top: 1.5rem;
         }
-        .box {
-            background: rgba(255,255,255,0.05);
-            padding: 3rem 4rem;
-            border-radius: 30px;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255,255,255,0.1);
-            text-align: center;
-        }
-        h1 { color: #a855f7; }
-        a { color: #6c3bfa; text-decoration: none; }
     </style>
 </head>
 <body>
-    <div class="box">
-        <h1>🎉 به داشبورد خوش آمدید!</h1>
-        <p>شما با موفقیت وارد شدید.</p>
-        <br>
-        <a href="index.html">↩ بازگشت به صفحه ورود</a>
+    <div class="dashboard-card">
+        <div class="avatar">
+            <i class="fas fa-user"></i>
+        </div>
+        <h1>داشبورد</h1>
+        <p class="sub">به پنل کاربری خود خوش آمدید</p>
+
+        <div class="info-box" id="userInfo">
+            <div class="item">
+                <span class="label"><i class="fas fa-envelope"></i> ایمیل</span>
+                <span class="value" id="displayEmail">—</span>
+            </div>
+            <div class="item">
+                <span class="label"><i class="fas fa-lock"></i> رمز عبور</span>
+                <span class="value" id="displayPassword">—</span>
+            </div>
+        </div>
+
+        <button class="btn-logout" id="logoutBtn">
+            <i class="fas fa-sign-out-alt"></i> خروج
+        </button>
+        <br />
+        <a href="index.html" class="btn-back">↩ بازگشت به صفحه ورود</a>
+        <div class="note">* رمز به صورت رمزنگاری شده‌ی ساده (base64) ذخیره شده است.</div>
     </div>
+
+    <script>
+        // دریافت اطلاعات از localStorage
+        const email = localStorage.getItem('userEmail');
+        const encodedPass = localStorage.getItem('userPassword');
+
+        // نمایش در المان‌ها
+        document.getElementById('displayEmail').textContent = email || 'مهمان';
+
+        if (encodedPass) {
+            // دیکد کردن رمز (برای نمایش)
+            try {
+                const decoded = atob(encodedPass);
+                document.getElementById('displayPassword').textContent = decoded;
+            } catch {
+                document.getElementById('displayPassword').textContent = 'خطا در رمزگشایی';
+            }
+        } else {
+            document.getElementById('displayPassword').textContent = '—';
+        }
+
+        // دکمه خروج: پاک کردن اطلاعات و برگشت به لاگین
+        document.getElementById('logoutBtn').addEventListener('click', function() {
+            localStorage.removeItem('userEmail');
+            localStorage.removeItem('userPassword');
+            window.location.href = 'index.html';
+        });
+    </script>
 </body>
 </html>
