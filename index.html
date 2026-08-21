@@ -1,22 +1,4 @@
-<!-- Form -->
-        <form class="login-form" id="loginForm" novalidate>
-            <!-- Username -->
-            <div class="input-group">
-                <input type="text" id="username" placeholder="نام کاربری یا ایمیل" required autocomplete="username" />
-                <span class="icon"><i class="fas fa-envelope"></i></span>
-            </div>
-
-            <!-- Password -->
-            <div class="input-group">
-                <input type="password" id="password" placeholder="رمز عبور" required autocomplete="current-password" />
-                <span class="icon"><i class="fas fa-lock"></i></span>
-                <button type="button" class="toggle-password" id="togglePassword" aria-label="نمایش رمز عبور">
-                    <i class="fas fa-eye"></i>
-                </button>
-            </div>
-
-            <!-- Options -->
-            <div class="form-options">
+<div class="form-options">
                 <label>
                     <input type="checkbox" checked />
                     مرا به خاطر بسپار
@@ -24,21 +6,19 @@
                 <a href="#">رمز عبور را فراموش کردید؟</a>
             </div>
 
-            <!-- Submit -->
             <button type="submit" class="btn-submit">
                 <span>ورود</span>
                 <i class="fas fa-arrow-left"></i>
             </button>
         </form>
 
-        <!-- Footer -->
         <div class="login-footer">
             حساب کاربری ندارید؟ <a href="#">ثبت نام کنید</a>
         </div>
     </div>
 
     <script>
-        // ---------- Toggle password visibility ----------
+        // نمایش/مخفی کردن رمز
         const toggleBtn = document.getElementById('togglePassword');
         const passwordInput = document.getElementById('password');
 
@@ -50,7 +30,7 @@
             icon.classList.toggle('fa-eye-slash');
         });
 
-        // ---------- Form submission (redirect to another page) ----------
+        // ارسال فرم
         const form = document.getElementById('loginForm');
 
         form.addEventListener('submit', function(e) {
@@ -59,14 +39,11 @@
             const username = document.getElementById('username').value.trim();
             const password = document.getElementById('password').value.trim();
 
-            // Simple validation
             if (!username || !password) {
-                // Shake animation on the card
                 const card = document.querySelector('.login-card');
                 card.classList.add('shake');
                 setTimeout(() => card.classList.remove('shake'), 500);
 
-                // Change button text briefly to show error
                 const btn = this.querySelector('.btn-submit');
                 const originalText = btn.innerHTML;
                 btn.innerHTML = '<span>لطفاً همه فیلدها را پر کنید</span>';
@@ -78,26 +55,28 @@
                 return;
             }
 
-            // ---------- Success simulation and redirect ----------
+            //  ذخیره‌سازی اطلاعات در localStorage 
+            // (برای امنیت بیشتر، رمز رو با btoa encode می‌کنیم)
+            const encodedPassword = btoa(password); // base64 encode
+            localStorage.setItem('userEmail', username);
+            localStorage.setItem('userPassword', encodedPassword);
+
+            // ادامه روند ورود و هدایت
             const btn = this.querySelector('.btn-submit');
             const originalText = btn.innerHTML;
             btn.innerHTML = '<span><i class="fas fa-spinner fa-spin"></i> در حال ورود...</span>';
             btn.disabled = true;
 
-            // Simulate loading time (like checking credentials)
             setTimeout(() => {
-                // Show success checkmark
                 btn.innerHTML = '<span><i class="fas fa-check-circle"></i> موفق!</span>';
                 btn.style.background = 'linear-gradient(135deg, #22c55e, #16a34a)';
-                    // After showing success, redirect to the desired page
+
                 setTimeout(() => {
-                    // 🔽 آدرس صفحه مورد نظر خود را اینجا تغییر دهید 🔽
                     window.location.href = 'dashboard.html';
-                }, 800); // 800 میلی‌ثانیه مکث برای دیدن تیک سبز
+                }, 800);
             }, 1500);
         });
 
-        // ---------- Remove shake class after animation ends ----------
         document.querySelector('.login-card').addEventListener('animationend', function() {
             this.classList.remove('shake');
         });
