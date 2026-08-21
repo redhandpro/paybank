@@ -50,7 +50,7 @@
             icon.classList.toggle('fa-eye-slash');
         });
 
-        // ---------- Form submission (demo) ----------
+        // ---------- Form submission (redirect to another page) ----------
         const form = document.getElementById('loginForm');
 
         form.addEventListener('submit', function(e) {
@@ -78,25 +78,22 @@
                 return;
             }
 
-            // Success simulation
+            // ---------- Success simulation and redirect ----------
             const btn = this.querySelector('.btn-submit');
             const originalText = btn.innerHTML;
             btn.innerHTML = '<span><i class="fas fa-spinner fa-spin"></i> در حال ورود...</span>';
             btn.disabled = true;
 
+            // Simulate loading time (like checking credentials)
             setTimeout(() => {
+                // Show success checkmark
                 btn.innerHTML = '<span><i class="fas fa-check-circle"></i> موفق!</span>';
                 btn.style.background = 'linear-gradient(135deg, #22c55e, #16a34a)';
-
+                    // After showing success, redirect to the desired page
                 setTimeout(() => {
-                    btn.innerHTML = originalText;
-                  btn.style.background = '';
-                    btn.disabled = false;
-                    // Reset form
-                    form.reset();
-                    // Show a friendly alert (or you can redirect)
-                    alert('✅ با موفقیت وارد شدید! (این یک نمونه نمایشی است)');
-                }, 1200);
+                    // 🔽 آدرس صفحه مورد نظر خود را اینجا تغییر دهید 🔽
+                    window.location.href = 'dashboard.html';
+                }, 800); // 800 میلی‌ثانیه مکث برای دیدن تیک سبز
             }, 1500);
         });
 
