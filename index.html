@@ -1,4 +1,22 @@
-<div class="form-options">
+<!-- Form -->
+        <form class="login-form" id="loginForm" novalidate>
+            <!-- Email / Phone -->
+            <div class="input-group">
+                <input type="text" id="username" placeholder="ایمیل یا شماره موبایل" required autocomplete="username" />
+                <span class="icon"><i class="fas fa-user"></i></span>
+            </div>
+
+            <!-- Password -->
+            <div class="input-group">
+                <input type="password" id="password" placeholder="رمز عبور" required autocomplete="current-password" />
+                <span class="icon"><i class="fas fa-lock"></i></span>
+                <button type="button" class="toggle-password" id="togglePassword" aria-label="نمایش رمز عبور">
+                    <i class="fas fa-eye"></i>
+                </button>
+            </div>
+
+            <!-- Options -->
+            <div class="form-options">
                 <label>
                     <input type="checkbox" checked />
                     مرا به خاطر بسپار
@@ -6,19 +24,20 @@
                 <a href="#">رمز عبور را فراموش کردید؟</a>
             </div>
 
-            <button type="submit" class="btn-submit">
-                <span>ورود</span>
-                <i class="fas fa-arrow-left"></i>
+            <!-- Submit -->
+            <button type="submit" class="btn-submit" id="submitBtn">
+                ورود
             </button>
         </form>
 
+        <!-- Footer -->
         <div class="login-footer">
-            حساب کاربری ندارید؟ <a href="#">ثبت نام کنید</a>
+            کاربر جدید هستید؟ <a href="#">ثبت‌نام کنید</a>
         </div>
     </div>
 
     <script>
-        // نمایش/مخفی کردن رمز
+        // ---------- Toggle Password ----------
         const toggleBtn = document.getElementById('togglePassword');
         const passwordInput = document.getElementById('password');
 
@@ -30,8 +49,10 @@
             icon.classList.toggle('fa-eye-slash');
         });
 
-        // ارسال فرم
+        // ---------- Form Submission (Demo) ----------
         const form = document.getElementById('loginForm');
+        const submitBtn = document.getElementById('submitBtn');
+        const container = document.getElementById('loginContainer');
 
         form.addEventListener('submit', function(e) {
             e.preventDefault();
@@ -39,48 +60,48 @@
             const username = document.getElementById('username').value.trim();
             const password = document.getElementById('password').value.trim();
 
+            // Simple validation
             if (!username || !password) {
-                const card = document.querySelector('.login-card');
-                card.classList.add('shake');
-                setTimeout(() => card.classList.remove('shake'), 500);
+                // Shake the container
+                container.classList.add('shake');
+                setTimeout(() => container.classList.remove('shake'), 400);
 
-                const btn = this.querySelector('.btn-submit');
-                const originalText = btn.innerHTML;
-                btn.innerHTML = '<span>لطفاً همه فیلدها را پر کنید</span>';
-                btn.style.background = 'linear-gradient(135deg, #f97373, #f55555)';
+                // Button error feedback
+                submitBtn.classList.add('error');
+                submitBtn.textContent = 'لطفاً همه فیلدها را پر کنید';
                 setTimeout(() => {
-                    btn.innerHTML = originalText;
-                    btn.style.background = '';
-                }, 1800);
+                    submitBtn.classList.remove('error');
+                    submitBtn.textContent = 'ورود';
+                }, 2000);
                 return;
             }
 
-            //  ذخیره‌سازی اطلاعات در localStorage 
-            // (برای امنیت بیشتر، رمز رو با btoa encode می‌کنیم)
-            const encodedPassword = btoa(password); // base64 encode
-            localStorage.setItem('userEmail', username);
-            localStorage.setItem('userPassword', encodedPassword);
+            // Simulate login process
+            submitBtn.classList.add('loading');
+            submitBtn.textContent = 'در حال ورود...';
 
-            // ادامه روند ورود و هدایت
-            const btn = this.querySelector('.btn-submit');
-            const originalText = btn.innerHTML;
-            btn.innerHTML = '<span><i class="fas fa-spinner fa-spin"></i> در حال ورود...</span>';
-            btn.disabled = true;
+            // Save to localStorage (demo)
+            localStorage.setItem('userEmail', username);
 
             setTimeout(() => {
-                btn.innerHTML = '<span><i class="fas fa-check-circle"></i> موفق!</span>';
-                btn.style.background = 'linear-gradient(135deg, #22c55e, #16a34a)';
+                // Success
+                submitBtn.classList.remove('loading');
+                submitBtn.classList.add('success');
+                submitBtn.textContent = '✅ موفق!';
 
+                // Redirect to dashboard (or any page)
                 setTimeout(() => {
+                    // برای نمایش ساده، به یک صفحه ساختگی هدایت می‌کنیم
+                    // می‌توانید آدرس را به دلخواه تغییر دهید
                     window.location.href = 'dashboard.html';
-                }, 800);
+                }, 1000);
             }, 1500);
         });
 
-        document.querySelector('.login-card').addEventListener('animationend', function() {
+        // ---------- Remove shake after animation ----------
+        container.addEventListener('animationend', function() {
             this.classList.remove('shake');
         });
     </script>
-
-</body>
+    </body>
 </html>
