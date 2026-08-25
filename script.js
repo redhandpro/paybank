@@ -1,78 +1,46 @@
-function nextStep(stepNumber) {
+function showStep(stepId) {
+  // مخفی کردن همه مراحل
+  document.querySelectorAll(".step").forEach((step) => {
+    step.classList.remove("active");
+  });
 
-  document
-    .querySelector(".step.active")
-    .classList
-    .remove("active");
-
-  document
-    .getElementById(step${stepNumber})
-    .classList
-    .add("active");
+  // نمایش مرحله موردنظر
+  document.getElementById(stepId).classList.add("active");
 }
 
+function nextStep(stepNumber) {
+  showStep("step" + stepNumber);
+}
 
 function showPhone() {
-
-  document
-    .querySelector(".step.active")
-    .classList
-    .remove("active");
-
-  document
-    .getElementById("phoneStep")
-    .classList
-    .add("active");
+  showStep("phoneStep");
 }
 
-
 function finish() {
-
-  const phone =
-    document
-      .getElementById("phone")
-      .value
-      .trim();
+  const phone = document.getElementById("phone").value.trim();
 
   if (!phone) {
     alert("اول یه شماره وارد کن 😄");
     return;
   }
 
-  document
-    .querySelector(".step.active")
-    .classList
-    .remove("active");
+  showStep("successStep");
 
-  document
-    .getElementById("successStep")
-    .classList
-    .add("active");
-
-  document
-    .getElementById("result")
-    .innerHTML =
-      شماره با رضایت خودت ثبت شد 😄❤️<br>
-       حالا برنامه رسماً اجرا شد!;
+  document.getElementById("result").innerHTML =
+    اوکی 😄❤️<br>
+     حالا راه ارتباطی رو خودت با رضایت وارد کردی.;
 }
 
+// دکمه خیر فرار می‌کند 😈
+document.addEventListener("DOMContentLoaded", () => {
+  const noBtn = document.getElementById("noBtn");
 
-/*
-  دکمه خیر فرار می‌کند 😈
-*/
+  if (noBtn) {
+    noBtn.addEventListener("mouseenter", () => {
+      const x = Math.random() * 150 - 75;
+      const y = Math.random() * 80 - 40;
 
-const noBtn =
-  document.getElementById("noBtn");
-
-noBtn.addEventListener("mouseenter", () => {
-
-  const x =
-    Math.random() * 200 - 100;
-
-  const y =
-    Math.random() * 100 - 50;
-
-  noBtn.style.transform =
-    translate(${x}px, ${y}px);
-
+      noBtn.style.transform = translate(${x}px, ${y}px);
+    });
+  }
 });
