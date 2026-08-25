@@ -1,107 +1,165 @@
-<!-- Form -->
-        <form class="login-form" id="loginForm" novalidate>
-            <!-- Email / Phone -->
-            <div class="input-group">
-                <input type="text" id="username" placeholder="ایمیل یا شماره موبایل" required autocomplete="username" />
-                <span class="icon"><i class="fas fa-user"></i></span>
-            </div>
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-            <!-- Password -->
-            <div class="input-group">
-                <input type="password" id="password" placeholder="رمز عبور" required autocomplete="current-password" />
-                <span class="icon"><i class="fas fa-lock"></i></span>
-                <button type="button" class="toggle-password" id="togglePassword" aria-label="نمایش رمز عبور">
-                    <i class="fas fa-eye"></i>
-                </button>
-            </div>
+  <title>Love.exe 💖</title>
 
-            <!-- Options -->
-            <div class="form-options">
-                <label>
-                    <input type="checkbox" checked />
-                    مرا به خاطر بسپار
-                </label>
-                <a href="#">رمز عبور را فراموش کردید؟</a>
-            </div>
+  <link rel="stylesheet" href="style.css" />
+</head>
 
-            <!-- Submit -->
-            <button type="submit" class="btn-submit" id="submitBtn">
-                ورود
-            </button>
-        </form>
+<body>
 
-        <!-- Footer -->
-        <div class="login-footer">
-            کاربر جدید هستید؟ <a href="#">ثبت‌نام کنید</a>
-        </div>
+  <div class="background"></div>
+
+  <main class="card">
+
+    <div class="terminal">
+      <span class="red"></span>
+      <span class="yellow"></span>
+      <span class="green"></span>
+      <span class="terminal-title">love.exe</span>
     </div>
 
-    <script>
-        // ---------- Toggle Password ----------
-        const toggleBtn = document.getElementById('togglePassword');
-        const passwordInput = document.getElementById('password');
+    <!-- STEP 1 -->
+    <section class="step active" id="step1">
 
-        toggleBtn.addEventListener('click', function() {
-            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
-            passwordInput.setAttribute('type', type);
-            const icon = this.querySelector('i');
-            icon.classList.toggle('fa-eye');
-            icon.classList.toggle('fa-eye-slash');
-        });
+      <div class="emoji">👩‍💻💖👨‍💻</div>
 
-        // ---------- Form Submission (Demo) ----------
-        const form = document.getElementById('loginForm');
-        const submitBtn = document.getElementById('submitBtn');
-        const container = document.getElementById('loginContainer');
+      <h1>سلام برنامه‌نویس خوشگل 👀</h1>
 
-        form.addEventListener('submit', function(e) {
-            e.preventDefault();
+      <p>
+        یه برنامه‌ی کوچیک نوشتم...
+        <br>
+        ولی انگار بدون جواب تو اجرا نمی‌شه 😄
+      </p>
 
-            const username = document.getElementById('username').value.trim();
-            const password = document.getElementById('password').value.trim();
+      <button onclick="nextStep(2)">
+        اجراش کن 🚀
+      </button>
 
-            // Simple validation
-            if (!username || !password) {
-                // Shake the container
-                container.classList.add('shake');
-                setTimeout(() => container.classList.remove('shake'), 400);
+    </section>
 
-                // Button error feedback
-                submitBtn.classList.add('error');
-                submitBtn.textContent = 'لطفاً همه فیلدها را پر کنید';
-                setTimeout(() => {
-                    submitBtn.classList.remove('error');
-                    submitBtn.textContent = 'ورود';
-                }, 2000);
-                return;
-            }
 
-            // Simulate login process
-            submitBtn.classList.add('loading');
-            submitBtn.textContent = 'در حال ورود...';
+    <!-- STEP 2 -->
+    <section class="step" id="step2">
 
-            // Save to localStorage (demo)
-            localStorage.setItem('userEmail', username);
+      <div class="code">
+        <span class="purple">const</span>
+        programmer =
+        <span class="green">"تو"</span>;
+      </div>
 
-            setTimeout(() => {
-                // Success
-                submitBtn.classList.remove('loading');
-                submitBtn.classList.add('success');
-                submitBtn.textContent = '✅ موفق!';
+      <h2>سؤال اول 🤔</h2>
+                  <p>آیا هنوز هم عاشق برنامه‌نویسی هستی؟</p>
+            <div class="buttons">
+        <button onclick="nextStep(3)">آره 😎</button>
+        <button onclick="nextStep(3)">صددرصد 🔥</button>
+      </div>
 
-                // Redirect to dashboard (or any page)
-                setTimeout(() => {
-                    // برای نمایش ساده، به یک صفحه ساختگی هدایت می‌کنیم
-                    // می‌توانید آدرس را به دلخواه تغییر دهید
-                    window.location.href = 'dashboard.html';
-                }, 1000);
-            }, 1500);
-        });
+    </section>
 
-        // ---------- Remove shake after animation ----------
-        container.addEventListener('animationend', function() {
-            this.classList.remove('shake');
-        });
-    </script>
-    </body>
+
+    <!-- STEP 3 -->
+    <section class="step" id="step3">
+
+      <div class="emoji">🐛💻</div>
+
+      <h2>یه سؤال خیلی مهم...</h2>
+
+      <p>
+        به نظرت Debug کردن باگ‌ها سخت‌تره
+        <br>
+        یا جواب دادن به این سؤال؟ 😏
+      </p>
+
+      <div class="buttons">
+
+        <button onclick="nextStep(4)">
+          باگ‌ها 🐛
+        </button>
+
+        <button onclick="nextStep(4)">
+          این سؤال 😂
+        </button>
+
+      </div>
+
+    </section>
+
+
+    <!-- STEP 4 -->
+    <section class="step" id="step4">
+
+      <div class="emoji">❤️‍🔥</div>
+
+      <h2>خب... حالا رسیدیم به بخش اصلی برنامه 😏</h2>
+
+      <p>
+        آیا اجازه می‌دی بیشتر با هم در ارتباط باشیم؟
+      </p>
+
+      <div class="buttons">
+
+        <button onclick="showPhone()">
+          بله ❤️
+        </button>
+
+        <button id="noBtn">
+          خیر 😅
+        </button>
+
+      </div>
+
+    </section>
+
+
+    <!-- PHONE -->
+    <section class="step" id="phoneStep">
+
+      <div class="emoji">📱💖</div>
+
+      <h2>Yay! درخواست موفق بود 🎉</h2>
+
+      <p>
+        اگه دوست داشتی شماره‌ات رو اینجا وارد کن 😄
+      </p>
+
+      <input
+        type="tel"
+        id="phone"
+        placeholder="مثلاً 0912..."
+      />
+
+      <button onclick="finish()">
+        ثبت کن 🚀
+      </button>
+
+    </section>
+
+
+    <!-- SUCCESS -->
+    <section class="step" id="successStep">
+
+      <div class="emoji">🎉❤️</div>
+
+      <h1>Mission Completed!</h1>
+
+      <p id="result"></p>
+
+      <div class="code success-code">
+        status:
+        <span class="green">"connection_established"</span>
+      </div>
+
+    </section>
+
+  </main>
+
+  <script src="script.js"></script>
+
+</body>
 </html>
+
+      <p>آیا هنوز هم عاشق برنامه‌نویسی هستی؟</p>
