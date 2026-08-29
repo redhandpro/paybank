@@ -1,167 +1,47 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-  <title>برای خاص ترین نفر زندگی💖</title>
-
-  <link rel="stylesheet" href="style.css" />
-
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes" />
+    <title>سوالات عاشقانه</title>
+    <!-- لینک فونت وزیر -->
+    <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazir-font@v30.1.0/dist/font-face.css" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
 </head>
-
 <body>
+    <div class="container" id="app">
+        <!-- هدر -->
+        <header class="header">
+            <h1>💖 سوالات ویژه</h1>
+            <p>این سوالات مال توست، با دقت جواب بده 😉</p>
+        </header>
 
-  <div class="background"></div>
+        <!-- بخش اصلی: سوال و گزینه‌ها -->
+        <main class="quiz-box" id="quizBox">
+            <!-- توسط JS پر می‌شود -->
+        </main>
 
-  <main class="card">
+        <!-- بخش نتیجه (پایان) -->
+        <div class="result-box hidden" id="resultBox">
+            <div class="result-content">
+                <h2>🌹 ممنون از جوابات!</h2>
+                <p>جواب‌های قشنگت رو گرفتم:</p>
+                <ul id="answersList"></ul>
+                <div class="contact-card">
+                    <span class="label">📞 شماره من:</span>
+                    <span class="phone-number" id="myPhone">۰۹۱۲ ۳۴۵ ۶۷۸۹</span>
+                    <p class="hint">هر وقت خواستی باهام حرف بزنی، زنگ بزن ❤️</p>
+                </div>
+                <button class="btn-restart" onclick="restartQuiz()">🔄 دوباره امتحان کن</button>
+            </div>
+        </div>
 
-    <div class="terminal">
-      <span class="red"></span>
-      <span class="yellow"></span>
-      <span class="green"></span>
-      <span class="terminal-title">love.exe</span>
+        <!-- دکمه‌های ناوبری (در صورت نیاز) -->
+        <div class="nav-buttons" id="navButtons">
+            <button class="btn-next hidden" id="nextBtn" onclick="nextQuestion()">بعدی ➜</button>
+        </div>
     </div>
 
-    <!-- STEP 1 -->
-    <section class="step active" id="step1">
-
-      <div class="emoji">👩‍💻💖👨‍💻</div>
-
-      <h1>سلام خوبی ند تا سوال دارم👀</h1>
-
-      <p>
-        یه برنامه‌ی کوچیک نوشتم...
-        <br>
-        ولی انگار بدون جواب تو اجرا نمی‌شه 😄
-      </p>
-
-      <button onclick="nextStep(2)">
-        اجراش کن 🚀
-      </button>
-
-    </section>
-
-
-    <!-- STEP 2 -->
-    <section class="step" id="step2">
-
-      <div class="code">
-        <span class="purple">const</span>
-        programmer =
-        <span class="green">"تو"</span>;
-      </div>
-
-      <h2>سؤال اول 🤔</h2>
-              
-            <div class="buttons">
-        <button onclick="nextStep(3)">آره 😎</button>
-        <button onclick="nextStep(3)">صددرصد 🔥</button>
-      </div>
-
-    </section>
-
-
-    <!-- STEP 3 -->
-    <section class="step" id="step3">
-
-      <div class="emoji">🐛💻</div>
-
-      <h2>یه سؤال خیلی مهم...</h2>
-
-      <p>
-        به نظرت Debug کردن باگ‌ها سخت‌تره
-        <br>
-        یا جواب دادن به این سؤال؟ 😏
-      </p>
-
-      <div class="buttons">
-
-        <button onclick="nextStep(4)">
-          باگ‌ها 🐛
-        </button>
-
-        <button onclick="nextStep(4)">
-          این سؤال 😂
-        </button>
-
-      </div>
-
-    </section>
-
-
-    <!-- STEP 4 -->
-    <section class="step" id="step4">
-
-      <div class="emoji">❤️‍🔥</div>
-
-      <h2>خب... حالا رسیدیم به بخش اصلی برنامه 😏</h2>
-
-      <p>
-        آیا اجازه می‌دی بیشتر با هم در ارتباط باشیم؟
-      </p>
-
-      <div class="buttons">
-
-        <button onclick="showPhone()">
-          بله ❤️
-        </button>
-
-        <button id="noBtn">
-          خیر 😅
-        </button>
-
-      </div>
-
-    </section>
-
-
-    <!-- PHONE -->
-    <section class="step" id="phoneStep">
-
-      <div class="emoji">📱💖</div>
-
-      <h2>Yay! درخواست موفق بود 🎉</h2>
-
-      <p>
-        اگه دوست داشتی شماره‌ات رو اینجا وارد کن 😄
-      </p>
-
-      <input
-        type="tel"
-        id="phone"
-        placeholder="مثلاً 0912..."
-      />
-
-      <button onclick="finish()">
-        ثبت کن 🚀
-      </button>
-
-    </section>
-
-
-    <!-- SUCCESS -->
-    <section class="step" id="successStep">
-
-      <div class="emoji">🎉❤️</div>
-
-      <h1>Mission Completed!</h1>
-
-      <p id="result"></p>
-
-      <div class="code success-code">
-        status:
-        <span class="green">"connection_established"</span>
-      </div>
-
-    </section>
-
-  </main>
-
-  <script src="script.js"></script>
-  <script src="script.js"></script>
-
+    <script src="script.js"></script>
 </body>
 </html>
-
-      <p>آیا هنوز هم عاشق برنامه‌نویسی هستی؟</p>
