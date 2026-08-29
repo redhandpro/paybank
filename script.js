@@ -1,46 +1,32 @@
-function showStep(stepId) {
-  // مخفی کردن همه مراحل
-  document.querySelectorAll(".step").forEach((step) => {
-    step.classList.remove("active");
-  });
-
-  // نمایش مرحله موردنظر
-  document.getElementById(stepId).classList.add("active");
-}
-
-function nextStep(stepNumber) {
-  showStep("step" + stepNumber);
-}
-
-function showPhone() {
-  showStep("phoneStep");
-}
-
-function finish() {
-  const phone = document.getElementById("phone").value.trim();
-
-  if (!phone) {
-    alert("اول یه شماره وارد کن 😄");
-    return;
-  }
-
-  showStep("successStep");
-
-  document.getElementById("result").innerHTML =
-    اوکی 😄❤️<br>
-     حالا راه ارتباطی رو خودت با رضایت وارد کردی.;
-}
-
-// دکمه خیر فرار می‌کند 😈
-document.addEventListener("DOMContentLoaded", () => {
-  const noBtn = document.getElementById("noBtn");
-
-  if (noBtn) {
-    noBtn.addEventListener("mouseenter", () => {
-      const x = Math.random() * 150 - 75;
-      const y = Math.random() * 80 - 40;
-
-      noBtn.style.transform = translate(${x}px, ${y}px);
+let listHtml = '';
+    questions.forEach((q, idx) => {
+        const answerIndex = userAnswers[idx];
+        const answerText = (answerIndex !== undefined) ? q.options[answerIndex] : '❌ پاسخ داده نشده';
+        listHtml += 
+            <li>
+                <span class="question-label">${q.text}</span>
+                <span class="answer-value">${answerText}</span>
+            </li>
+        ;
     });
-  }
-});
+    answersList.innerHTML = listHtml;
+
+    // شماره تماس (که در HTML نوشته شده)
+    // در صورت نیاز می‌توانید شماره را از اینجا تنظیم کنید
+    // document.getElementById('myPhone').textContent = '۰۹۱۲ ۳۴۵ ۶۷۸۹';
+}
+
+// بازنشانی (شروع مجدد)
+function restartQuiz() {
+    currentIndex = 0;
+    userAnswers = [];
+    resultBox.classList.remove('show');
+    quizBox.style.display = 'block';
+    nextBtn.classList.remove('hidden');
+    renderQuestion(0);
+    // اسکرول به بالا
+    document.querySelector('.container').scrollIntoView({ behavior: 'smooth' });
+}
+
+// ======== راه‌اندازی اولیه ========
+renderQuestion(0);
