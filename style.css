@@ -1,231 +1,82 @@
-* {
-  box-sizing: border-box;
+.btn-restart {
+    background: rgba(255, 255, 255, 0.7);
+    border: none;
+    border-radius: 40px;
+    padding: 12px 24px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #2d1b3a;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    width: 100%;
+    backdrop-filter: blur(4px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    margin-top: 4px;
 }
 
-body {
-  margin: 0;
-  min-height: 100vh;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  font-family: Arial, sans-serif;
-
-  background: #0d1117;
-  color: white;
-
-  overflow: hidden;
+.btn-restart:active {
+    transform: scale(0.96);
 }
 
-.background {
-  position: fixed;
-  inset: 0;
-
-  background:
-    radial-gradient(
-      circle at top left,
-      #2b1055,
-      transparent 40%
-    ),
-    radial-gradient(
-      circle at bottom right,
-      #3a0ca3,
-      transparent 40%
-    );
-
-  z-index: -1;
+/* -------------------- navigation buttons -------------------- */
+.nav-buttons {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
 }
 
-.card {
-  width: 90%;
-  max-width: 550px;
-
-  min-height: 430px;
-
-  background: rgba(22, 27, 34, 0.92);
-
-  border: 1px solid #30363d;
-  border-radius: 20px;
-
-  overflow: hidden;
-
-  box-shadow:
-    0 20px 80px rgba(0, 0, 0, 0.5);
+.btn-next {
+    background: rgba(255, 255, 255, 0.7);
+    border: none;
+    border-radius: 40px;
+    padding: 12px 32px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #2d1b3a;
+    backdrop-filter: blur(4px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    width: 100%;
 }
 
-.terminal {
-  height: 50px;
-
-  background: #161b22;
-
-  display: flex;
-  align-items: center;
-
-  padding: 0 18px;
-  gap: 8px;
-}
-.terminal span:not(.terminal-title) {
-  width: 12px;
-  height: 12px;
-
-  border-radius: 50%;
+.btn-next:active {
+    transform: scale(0.96);
 }
 
-.red {
-  background: #ff5f57;
+.btn-next.hidden {
+    display: none;
 }
 
-.yellow {
-  background: #ffbd2e;
+/* -------------------- animations -------------------- */
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
-.green {
-  background: #28c840;
-}
-
-.terminal-title {
-  margin-right: 10px;
-
-  color: #8b949e;
-  font-size: 14px;
-}
-
-.step {
-  display: none;
-
-  min-height: 380px;
-
-  padding: 40px 25px;
-
-  text-align: center;
-
-  animation: fade 0.5s ease;
-}
-
-.step.active {
-  display: block;
-}
-
-@keyframes fade {
-
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-}
-
-.emoji {
-  font-size: 70px;
-  margin-bottom: 20px;
-}
-
-h1,
-h2 {
-  margin-bottom: 20px;
-}
-
-p {
-  color: #c9d1d9;
-
-  line-height: 2;
-
-  margin-bottom: 30px;
-}
-
-button {
-  border: none;
-
-  padding: 13px 28px;
-
-  border-radius: 10px;
-
-  font-size: 16px;
-    ;
-
-  cursor: pointer;
-
-  background: #238636;
-  color: white;
-
-  transition:
-    transform 0.2s,
-    background 0.2s;
-}
-
-button:hover {
-  transform: scale(1.05);
-
-  background: #2ea043;
-}
-
-.buttons {
-  display: flex;
-
-  justify-content: center;
-
-  gap: 15px;
-
-  flex-wrap: wrap;
-
-  position: relative;
-}
-
-#noBtn {
-  background: #da3633;
-}
-
-.code {
-  direction: ltr;
-
-  background: #010409;
-
-  padding: 15px;
-
-  border-radius: 10px;
-
-  margin-bottom: 30px;
-
-  font-family: monospace;
-
-  color: white;
-}
-
-.purple {
-  color: #d2a8ff;
-}
-
-.code .green,
-.success-code .green {
-  color: #3fb950;
-}
-
-input {
-  width: 100%;
-
-  padding: 15px;
-
-  border-radius: 10px;
-
-  border: 1px solid #30363d;
-
-  background: #0d1117;
-
-  color: white;
-
-  font-size: 18px;
-
-  text-align: center;
-
-  margin-bottom: 15px;
-}
-
-.success-code {
-  margin-top: 30px;
+/* -------------------- responsive fine-tune -------------------- */
+@media (max-width: 480px) {
+    .container {
+        padding: 16px 12px 24px;
+    }
+    .header h1 {
+        font-size: 24px;
+    }
+    .question-text {
+        font-size: 18px;
+    }
+    .option-item {
+        font-size: 15px;
+        padding: 12px 14px;
+    }
+    .contact-card .phone-number {
+        font-size: 22px;
+    }
 }
