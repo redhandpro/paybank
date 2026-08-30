@@ -1,55 +1,425 @@
-.card {
-  font-family: Montserrat, sans-serif;
-  width: 300px;
-  height: 250px;
-  translate: -6px -6px;
-  background: #ff66a3;
-  border: 3px solid #000000;
-  box-shadow: 12px 12px 0 #000000;
-  overflow: hidden;
-  transition: all 0.3s ease;
+/* ---------- ریست و پایه ---------- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-.head {
-  font-family: Montserrat, sans-serif;
-  font-size: 14px;
-  font-weight: 900;
-  width: 100%;
-  height: 32px;
-  background: #ffffff;
-  padding: 5px 12px;
-  color: #000000;
-  border-bottom: 3px solid #000000;
+body {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Vazirmatn', sans-serif;
+    background: linear-gradient(145deg, #fce4ec, #f3e5f5, #fce4ec);
+    background-size: 400% 400%;
+    animation: gradientBG 12s ease infinite;
+    padding: 1rem;
+    position: relative;
+    overflow-x: hidden;
 }
 
-.content {
-  padding: 8px 12px;
-  font-size: 14px;
-  font-weight: 600;
+@keyframes gradientBG {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
 }
 
-.button {
-  padding: 5px 10px;
-  margin-top: 10px;
-  border: 3px solid #000000;
-  box-shadow: 3px 3px 0 #000000;
-  font-weight: 750;
-  background: #4ade80;
-  transition: all 0.3s ease;
-  cursor: pointer;
+/* ---------- قلب‌های شناور ---------- */
+.floating-hearts {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
 }
 
-.button:hover {
-  translate: 1.5px 1.5px;
-  box-shadow: 1.5px 1.5px 0 #000000;
-  background: #1ac2ff;
+.heart {
+    position: absolute;
+    bottom: -80px;
+    font-size: 1.8rem;
+    opacity: 0.3;
+    animation: floatHeart linear infinite;
+    color: #e91e63;
+    user-select: none;
 }
 
-.button:active {
-  translate: 3px 3px;
-  box-shadow: 0 0 0 #000000;
+@keyframes floatHeart {
+    0% {
+        transform: translateY(0) rotate(0deg) scale(1);
+        opacity: 0.2;
+    }
+    100% {
+        transform: translateY(-110vh) rotate(720deg) scale(1.6);
+        opacity: 0;
+    }
 }
 
-.card:hover {
-  translate: -6px;
+.heart:nth-child(1) {
+    left: 5%;
+    font-size: 2.2rem;
+    animation-duration: 16s;
+    animation-delay: 0s;
+}
+.heart:nth-child(2) {
+    left: 15%;
+    font-size: 1.6rem;
+    animation-duration: 19s;
+    animation-delay: 2s;
+}
+.heart:nth-child(3) {
+    left: 25%;
+    font-size: 2.8rem;
+    animation-duration: 14s;
+    animation-delay: 4s;
+}
+.heart:nth-child(4) {
+    left: 38%;
+    font-size: 1.9rem;
+    animation-duration: 17s;
+    animation-delay: 1s;
+}
+.heart:nth-child(5) {
+    left: 50%;
+    font-size: 3rem;
+    animation-duration: 20s;
+    animation-delay: 3s;
+}
+.heart:nth-child(6) {
+    left: 62%;
+    font-size: 1.7rem;
+    animation-duration: 15s;
+    animation-delay: 5s;
+}
+.heart:nth-child(7) {
+    left: 75%;
+    font-size: 2.4rem;
+    animation-duration: 18s;
+    animation-delay: 2.5s;
+}
+.heart:nth-child(8) {
+    left: 88%;
+    font-size: 2rem;
+    animation-duration: 16s;
+    animation-delay: 4.5s;
+}
+.heart:nth-child(9) {
+    left: 95%;
+    font-size: 1.5rem;
+    animation-duration: 21s;
+    animation-delay: 1.5s;
+}
+
+/* ---------- کارت اصلی ---------- */
+.doodle-card-front {
+    position: relative;
+    z-index: 1;
+    max-width: 540px;
+    width: 100%;
+    min-height: 380px;
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-radius: 60px;
+    padding: 2.8rem 2rem 2.5rem;
+    box-shadow: 0 30px 60px rgba(233, 30, 99, 0.20), 0 10px 30px rgba(233, 30, 99, 0.10),
+        inset 0 1px 0 rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.4s ease;
+    animation: cardEntry 0.8s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+    opacity: 0;
+    transform: translateY(40px) scale(0.96);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.doodle-card-front:hover {
+    transform: translateY(-6px) scale(1.01);
+    box-shadow: 0 40px 80px rgba(233, 30, 99, 0.30);
+}
+
+@keyframes cardEntry {
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* ---------- مراحل ---------- */
+.step {
+    display: block;
+    animation: fadeStep 0.6s ease forwards;
+}
+
+.step.hidden {
+    display: none !important;
+}
+
+@keyframes fadeStep {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ---------- عنوان ---------- */
+.doodle-title {
+    font-size: 1.9rem;
+    font-weight: 900;
+    color: #880e4f;
+    line-height: 1.5;
+    margin-bottom: 0.5rem;
+    text-shadow: 0 2px 8px rgba(233, 30, 99, 0.15);
+}
+
+.doodle-title .emoji-big {
+    display: inline-block;
+    animation: pulseHeart 1.6s ease-in-out infinite;
+}
+
+/* ---------- سوال ---------- */
+.doodle-question {
+    font-size: 1.7rem;
+    font-weight: 700;
+    color: #4a0033;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 40px;
+    padding: 1.2rem 1rem;
+    margin: 1.2rem 0 2rem;
+    border: 1px solid rgba(233, 30, 99, 0.15);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    box-shadow: inset 0 2px 10px rgba(233, 30, 99, 0.05);
+    line-height: 1.6;
+}
+
+@keyframes pulseHeart {
+    0%,
+    100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.25);
+    }
+}
+
+/* ---------- دکمه‌ها ---------- */
+.doodle-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1.8rem;
+    flex-wrap: wrap;
+    margin-top: 0.8rem;
+}
+
+.doodle-btn {
+    font-family: 'Vazirmatn', sans-serif;
+    font-weight: 700;
+    font-size: 1.4rem;
+    padding: 0.9rem 2.8rem;
+    border: none;
+    border-radius: 60px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+    position: relative;
+    overflow: hidden;
+    letter-spacing: 0.5px;
+    min-width: 130px;
+}
+
+.doodle-btn::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.4) 0%, transparent 70%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+}
+
+.doodle-btn:hover::after {
+    opacity: 1;
+}
+
+.doodle-btn-pink {
+    background: linear-gradient(145deg, #e91e63, #c2185b);
+    color: #fff;
+    box-shadow: 0 10px 30px rgba(233, 30, 99, 0.35);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+.doodle-btn-pink:hover {
+    transform: scale(1.08) translateY(-4px);
+    box-shadow: 0 18px 40px rgba(233, 30, 99, 0.50);
+}
+
+.doodle-btn-pink:active {
+    transform: scale(0.96);
+}
+
+.doodle-btn-ghost {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    color: #6a1b4a;
+    border: 1.5px solid rgba(233, 30, 99, 0.20);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.04);
+}
+
+.doodle-btn-ghost:hover {
+    transform: scale(1.04) translateY(-3px);
+    background: rgba(255, 255, 255, 0.9);
+    border-color: #e91e63;
+    box-shadow: 0 12px 32px rgba(233, 30, 99, 0.12);
+    color: #880e4f;
+}
+
+.doodle-btn-ghost:active {
+    transform: scale(0.96);
+}
+
+/* ---------- پیام نهایی با امتیاز ---------- */
+.final-message {
+    padding: 0.5rem 0;
+}
+
+.final-message .big-heart {
+    font-size: 4rem;
+    display: block;
+    animation: pulseHeart 1s ease-in-out infinite;
+    margin-bottom: 0.5rem;
+}
+
+.final-text {
+    font-size: 1.8rem;
+    font-weight: 900;
+    color: #880e4f;
+    line-height: 1.8;
+    margin-bottom: 0.5rem;
+}
+
+.phone-number {
+    font-size: 2.2rem;
+    font-weight: 900;
+    color: #e91e63;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 40px;
+    padding: 0.8rem 1.5rem;
+    margin: 0.5rem 0 1.5rem;
+    border: 2px solid rgba(233, 30, 99, 0.2);
+    display: inline-block;
+    letter-spacing: 2px;
+    direction: ltr;
+}
+
+.score-box {
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 40px;
+    padding: 1rem 1.5rem;
+    margin: 1rem 0;
+    border: 2px solid rgba(233, 30, 99, 0.2);
+    backdrop-filter: blur(4px);
+}
+
+.score-label {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #6a1b4a;
+}
+
+.score-number {
+    font-size: 3rem;
+    font-weight: 900;
+    color: #e91e63;
+    margin: 0 0.5rem;
+    display: inline-block;
+    animation: pulseHeart 1.2s ease-in-out infinite;
+}
+
+.score-message {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #4a0033;
+    margin-top: 1rem;
+    padding: 0.8rem;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 30px;
+    border: 1px solid rgba(233, 30, 99, 0.1);
+}
+
+/* ---------- ریسپانسیو ---------- */
+@media (max-width: 480px) {
+    .doodle-card-front {
+        padding: 2rem 1.2rem 1.8rem;
+        border-radius: 40px;
+        min-height: 320px;
+    }
+    .doodle-title {
+        font-size: 1.5rem;
+    }
+    .doodle-question {
+        font-size: 1.3rem;
+        padding: 1rem 0.8rem;
+    }
+    .doodle-btn {
+        font-size: 1.2rem;
+        padding: 0.7rem 2rem;
+        min-width: 100px;
+    }
+    .doodle-buttons {
+        gap: 1.2rem;
+    }
+    .heart {
+        font-size: 1.2rem !important;
+    }
+    .final-text {
+        font-size: 1.4rem;
+    }
+    .phone-number {
+        font-size: 1.8rem;
+        padding: 0.6rem 1rem;
+    }
+    .score-number {
+        font-size: 2.5rem;
+    }
+    .score-label {
+        font-size: 1.1rem;
+    }
+    .score-message {
+        font-size: 1.2rem;
+    }
+}
+
+@media (max-width: 380px) {
+    .doodle-title {
+        font-size: 1.2rem;
+    }
+    .doodle-question {
+        font-size: 1.1rem;
+    }
+    .doodle-btn {
+        font-size: 1rem;
+        padding: 0.6rem 1.2rem;
+        min-width: 80px;
+    }
+    .phone-number {
+        font-size: 1.5rem;
+    }
+    .score-number {
+        font-size: 2rem;
+    }
 }
