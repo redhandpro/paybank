@@ -1,9 +1,149 @@
-<div class="card">
-  <div class="head">Window</div>
-  <div class="content">
-    This is a neobrutalist-style window with a button and space for any content
-    you want!
-    <br />
-    <button class="button">Button</button>
-  </div>
-</div>
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>سوالات عاشقانه ❤️</title>
+
+    <!-- فونت -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;700;900&display=swap" rel="stylesheet" />
+
+    <!-- CSS جدا -->
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+    <!-- قلب‌های شناور -->
+    <div class="floating-hearts">
+        <span class="heart">❤️</span>
+        <span class="heart">💖</span>
+        <span class="heart">💗</span>
+        <span class="heart">❤️‍🔥</span>
+        <span class="heart">💘</span>
+        <span class="heart">💝</span>
+        <span class="heart">❤️</span>
+        <span class="heart">💖</span>
+        <span class="heart">💗</span>
+    </div>
+
+    <!-- کارت اصلی -->
+    <div class="doodle-card-front">
+
+        <!-- مرحله ۱ -->
+        <div id="step1" class="step">
+            <div class="doodle-title">
+                <span class="emoji-big">😊</span>
+                سوال <span id="questionNumber1">۱</span> از ۴
+            </div>
+
+            <div class="doodle-question" id="questionText1">
+                خیلی وقته میخواستم باهات صحبت کنم اما نمیدونستم چطور
+            </div>
+
+            <div class="doodle-buttons">
+                <button type="button" class="doodle-btn doodle-btn-pink" onclick="answerQuestion(1, true)">
+                    باش
+                </button>
+                <button type="button" class="doodle-btn doodle-btn-ghost" onclick="answerQuestion(1, false)">
+                    خیر
+                </button>
+            </div>
+        </div>
+
+        <!-- مرحله ۲ -->
+        <div id="step2" class="step hidden">
+            <div class="doodle-title">
+                <span class="emoji-big">🥰</span>
+                سوال <span id="questionNumber2">۲</span> از ۴
+            </div>
+
+            <div class="doodle-question" id="questionText2">
+                من اینو برای تو طراحی کردم و اینکه ازت خوشم میاد
+            </div>
+
+            <div class="doodle-buttons">
+                <button type="button" class="doodle-btn doodle-btn-pink" onclick="answerQuestion(2, true)">
+                    باش
+                </button>
+                <button type="button" class="doodle-btn doodle-btn-ghost" onclick="answerQuestion(2, false)">
+                    خیر
+                </button>
+            </div>
+        </div>
+
+        <!-- مرحله ۳ -->
+        <div id="step3" class="step hidden">
+            <div class="doodle-title">
+                <span class="emoji-big">💕</span>
+                سوال <span id="questionNumber3">۳</span> از ۴
+            </div>
+
+            <div class="doodle-question" id="questionText3">
+                میشه بیشتر صحبت کنیم؟
+            </div>
+
+            <div class="doodle-buttons">
+                <button type="button" class="doodle-btn doodle-btn-pink" onclick="answerQuestion(3, true)">
+                    باش
+                </button>
+                <button type="button" class="doodle-btn doodle-btn-ghost" onclick="answerQuestion(3, false)">
+                    خیر
+                </button>
+            </div>
+        </div>
+
+        <!-- مرحله ۴ -->
+        <div id="step4" class="step hidden">
+            <div class="doodle-title">
+                <span class="emoji-big">💖</span>
+                سوال <span id="questionNumber4">۴</span> از ۴
+            </div>
+
+            <div class="doodle-question" id="questionText4">
+                اگر موافق هستی شماره‌مو بهت میدم، بهم پیام بده
+            </div>
+
+            <div class="doodle-buttons">
+                <button type="button" class="doodle-btn doodle-btn-pink" onclick="answerQuestion(4, true)">
+                    باش
+                </button>
+                <button type="button" class="doodle-btn doodle-btn-ghost" onclick="answerQuestion(4, false)">
+                    نه
+                </button>
+            </div>
+        </div>
+
+        <!-- پیام نهایی با امتیاز -->
+        <div id="finalStep" class="step hidden">
+            <div class="final-message">
+                <span class="big-heart">💕</span>
+                <div class="final-text">
+                    شماره من:
+                </div>
+                <div class="phone-number">
+                    ۰۹۳۸۸۶۲۲۰۰۲
+                </div>
+                <div class="score-box">
+                    <span class="score-label">امتیاز شما:</span>
+                    <span class="score-number" id="scoreDisplay">۰</span>
+                    <span class="score-label">از ۴</span>
+                </div>
+                <div id="scoreMessage" class="score-message">
+                    <!-- پیام بر اساس امتیاز اینجا میاد -->
+                </div>
+                <div style="margin-top: 1.5rem; font-size: 2.5rem;">
+                    🌹❤️🌹
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- JS جدا -->
+    <script src="script.js"></script>
+
+</body>
+</html>
+
